@@ -534,6 +534,18 @@ public static class Extensions{
         var old = tr.localPosition;
         return tr.slide(from, old, MathUtil.ease1, duration);
     }
+
+    // TODO: slide series - handle negative scale of rt
+    public static IEnumerator slide_in_right(this RectTransform rt, float duration = standardAnimationDuration){
+        var screen_left_to_tr_right = rt.get_world_corners()[2].x;
+        Debug.Log(screen_left_to_tr_right);
+        return slide_in(rt, rt.parent.InverseTransformPoint(rt.position + Vector3.left * screen_left_to_tr_right), duration);
+    }
+    public static IEnumerator slide_in_left(this RectTransform rt, float duration = standardAnimationDuration){
+        var r = rt.GetComponentInParent<Canvas>().renderingDisplaySize.x;
+        var screen_right_to_tr_left = r - rt.get_world_corners()[0].x;
+        return slide_in(rt, rt.parent.InverseTransformPoint(rt.position + Vector3.right * screen_right_to_tr_left), duration);
+    }
     public static IEnumerator slide_in_down(this RectTransform rt, float duration = standardAnimationDuration){
         var t = rt.GetComponentInParent<Canvas>().renderingDisplaySize.y;
         var screen_top_to_tr_bottom = t - rt.get_world_corners()[0].y;
@@ -543,6 +555,15 @@ public static class Extensions{
     public static IEnumerator slide_in_up(this RectTransform rt, float duration = standardAnimationDuration){
         var screen_bottom_to_tr_top = rt.get_world_corners()[1].y;
         return slide_in(rt, rt.parent.InverseTransformPoint(rt.position + Vector3.down * screen_bottom_to_tr_top), duration);
+    }
+    public static IEnumerator slide_out_left(this RectTransform rt, float duration = standardAnimationDuration){
+        var screen_left_to_tr_right = rt.get_world_corners()[2].x;
+        return slide_out(rt, rt.parent.InverseTransformPoint(rt.position + Vector3.left * screen_left_to_tr_right), duration);
+    }
+    public static IEnumerator slide_out_right(this RectTransform rt, float duration = standardAnimationDuration){
+        var r = rt.GetComponentInParent<Canvas>().renderingDisplaySize.x;
+        var screen_right_to_tr_left = r - rt.get_world_corners()[0].x;
+        return slide_out(rt, rt.parent.InverseTransformPoint(rt.position + Vector3.right * screen_right_to_tr_left), duration);
     }
 
     public static IEnumerator slide_out_up(this RectTransform rt, float duration = standardAnimationDuration){
@@ -559,6 +580,10 @@ public static class Extensions{
     // lb, lt, rt, rb
     public static Vector3[] get_world_corners(this RectTransform rt){
         var corners = new Vector3[4]; 
+        // Each corner provides its world space value. 
+        // The returned array of 4 vertices is clockwise. 
+        // It starts bottom left and rotates to top left, then top right, and finally bottom right. 
+        // Note that bottom left, for example, is an (x, y, z) vector with x being left and y being bottom.
         rt.GetWorldCorners(corners);
         return corners;
     }
@@ -577,7 +602,7 @@ public static class Extensions{
 
     public static IEnumerator fade(this Image sr, float from, float to, float duration = standardAnimationDuration){
         var fromNow = new FromNow(duration);
-        while(!fromNow.Expired && sr.gameObject != null){
+        while(!fromNow.Expired && sr != null){
             sr.setAlpha(Mathf.Lerp(from, to, fromNow.Progress * fromNow.Progress));
             yield return null;
         }
@@ -760,14 +785,18 @@ public static class Extensions{
     // public static blender startBlend(this Transform tr, System.Func<bool> stopped){
     //     return new blender(tr, stopped);
     // }
-
     
-    public static IEnumerable<T> Concat<T>(this IEnumerable<T> enumerable, T what){
-        return enumerable.Concat(new T[]{what});
-    }
 
     public static IEnumerable<T> Except<T>(this IEnumerable<T> enumerable, T what){
         return enumerable.Except(new T[]{what});
+    }
+    public static void ForEach<T>(this IEnumerable<T> enumerable, Action<T, int> job){
+        for(var i = 0; i < enumerable.Count(); ++i){
+            job(enumerable.ElementAt(i), i);
+        }
+    }
+    public static void ForEach<T>(this IEnumerable<T> enumerable, Action<T> job){
+        enumerable.ForEach((e, i) => job(e));
     }
     public static Stack<T> ToStack<T>(this IEnumerable<T> enumerable){
         var result = new Stack<T>();
@@ -1045,11 +1074,11 @@ public static class Extensions{
     }
 
     public static IEnumerable<T> Enumerate<T> (this (T, T, T) value){
-        return (value.Item1, value.Item2).Enumerate().Concat(value.Item3);
+        return (value.Item1, value.Item2).Enumerate().Append(value.Item3);
     }
 
     public static IEnumerable<T> Enumerate<T> (this (T, T, T, T) value){
-        return (value.Item1, value.Item2, value.Item3).Enumerate().Concat(value.Item4);
+        return (value.Item1, value.Item2, value.Item3).Enumerate().Append(value.Item4);
     }
 
     // public static void EnsureLayout(this Canvas canvas){

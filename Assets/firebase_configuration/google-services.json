@@ -1,0 +1,119 @@
+{
+  "project_info": {
+    "project_number": "870670473722",
+    "firebase_url": "https://fir-test-b8d06.firebaseio.com",
+    "project_id": "fir-test-b8d06",
+    "storage_bucket": "fir-test-b8d06.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870670473722:android:a17050f19b9ad7578b2c43",
+        "android_client_info": {
+          "package_name": "a.a.a"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "870670473722-kbkbdvnb8t6f1cvudc59e8ioechtp7ba.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBn0v2LWReNZnwVC3MNp824JN-csOpWGe0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "870670473722-kbkbdvnb8t6f1cvudc59e8ioechtp7ba.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "870670473722-cjgo1d496aa4ekmd373nqis89id0u4aa.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "a"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870670473722:android:3a9b43318d9f9dd1",
+        "android_client_info": {
+          "package_name": "com.vinylab.FirebaseTest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "870670473722-kbkbdvnb8t6f1cvudc59e8ioechtp7ba.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBn0v2LWReNZnwVC3MNp824JN-csOpWGe0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "870670473722-kbkbdvnb8t6f1cvudc59e8ioechtp7ba.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "870670473722-cjgo1d496aa4ekmd373nqis89id0u4aa.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "a"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870670473722:android:d3a839df160bdcd5",
+        "android_client_info": {
+          "package_name": "com.vinylab.RunAways"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "870670473722-kbkbdvnb8t6f1cvudc59e8ioechtp7ba.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBn0v2LWReNZnwVC3MNp824JN-csOpWGe0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "870670473722-kbkbdvnb8t6f1cvudc59e8ioechtp7ba.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "870670473722-cjgo1d496aa4ekmd373nqis89id0u4aa.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "a"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
