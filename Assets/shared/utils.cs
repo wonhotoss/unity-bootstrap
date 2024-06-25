@@ -1118,6 +1118,10 @@ public static class Extensions{
         }
         return (host.StartCoroutine(wrapper()), terminated);
     }
+
+    public static string report<T>(this IEnumerable<T> values, string title){
+        return string.Join("\n", values.Select(v => v.ToString()).Prepend(title));
+    }
 }
 
 [RequireComponent(typeof(CanvasRenderer))]
